@@ -1,0 +1,29 @@
+[
+  {
+    "Value": "S",
+    "VariationId": 1
+  },
+  {
+    "Value": "M",
+    "VariationId": 1
+  },
+  {
+    "Value": "L",
+    "VariationId": 1
+  },
+
+  {
+    "Value": "Xanh",
+    "VariationId": 2
+  },
+
+  {
+    "Value": "Đỏ",
+    "VariationId": 2
+  },
+
+  {
+    "Value": "Vàng",
+    "VariationId": 2
+  }
+]

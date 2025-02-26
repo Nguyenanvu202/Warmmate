@@ -16,7 +16,6 @@ public class StoreContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ItemImgConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductCategoryConfig).Assembly);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductItemConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(VariationConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(VariationOptConfig).Assembly);
@@ -24,7 +23,6 @@ public class StoreContext : DbContext
     protected StoreContext()
     {
     }
-    public DbSet<Product> Products { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<ProductItem> ProductItems { get; set; }
     public DbSet<ProductItemImg> ProductItemImgs { get; set; }

@@ -1,0 +1,90 @@
+[
+
+  {
+    "Name": "Áo dài tay thể thao",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 1
+  },
+
+  {
+    "Name": "Áo Thun ECC",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 1
+  },
+
+  {
+    "Name": "Áo Thun Nam Thể Thao",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 1
+  },
+
+  {
+    "Name": "Áo Sơ Mi Tay Dài Cổ Tàu",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 2
+  },
+
+  {
+    "Name": "Áo Sơ Mi Tay Dài Hiện Đại",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 2
+  },
+
+  {
+    "Name": "Áo Sơ Mi Tay Dài Oxford",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 2
+  },
+
+  {
+    "Name": "Quần Cầu Lông",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 3
+  },
+
+  {
+    "Name": "Quần Short Chạy Bộ",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 3
+  },
+
+  {
+    "Name": "Quần Short ECC",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 3
+  },
+
+  {
+    "Name": "Quần Jogger ECC",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 4
+  },
+
+  {
+    "Name": "Quần Giữ Nhiệt",
+    "Quantity": 20,
+    "Price": 300,
+    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+    "ProductCategoryId": 4
+  }
+]

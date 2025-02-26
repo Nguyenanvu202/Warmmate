@@ -12,16 +12,18 @@ public class ProductItemConfig : IEntityTypeConfiguration<ProductItem>
         builder.HasKey(i => i.Id);
         builder.Property(p => p.Price).HasColumnType("decimal(18,2)");
         builder.Property(q => q.Quantity).IsRequired();
+        builder.Property(n => n.Name).IsRequired().HasMaxLength(255);
+        builder.Property(n => n.Description).HasMaxLength(500);
 
         builder.Property(p => p.CreatedBy).HasMaxLength(255);
 		builder.Property(p => p.CreatedDate);
 		builder.Property(p => p.UpdatedBy).HasMaxLength(255);
 		builder.Property(p => p.UpdatedDate); 
-         //Relation with Product
+         //Relation with ProductCategory
         builder
-        .HasOne(p => p.Product)
+        .HasOne(p => p.ProductCategory)
         .WithMany(p => p.ProductItems)
-        .HasForeignKey(i => i.ProductId);
+        .HasForeignKey(i => i.ProductCategoryId);
 
         //Many to many relation
         builder

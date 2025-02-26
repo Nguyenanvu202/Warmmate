@@ -1,0 +1,266 @@
+[
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 1,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 2,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 3,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 4,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 5,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 6,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 7,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 8,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 9,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 10,
+    "OptForeignKey": 6
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 1
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 2
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 3
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 4
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 5
+  },
+  {
+    "ItemForeignKey": 11,
+    "OptForeignKey": 6
+  }
+]

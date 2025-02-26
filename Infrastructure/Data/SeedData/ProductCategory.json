@@ -1,0 +1,32 @@
+[
+  {
+    "Name":"Áo nam"
+  },
+
+  {
+    "Name":"Quần nam"
+  },
+  {
+    "Name":"Phụ kiện nam"
+  },
+
+  {
+    "Name": "Áo thun",
+    "ParentProductCategoryId": 1
+  },
+
+  {
+    "Name": "Áo sơ mi",
+    "ParentProductCategoryId": 1
+  },
+
+  {
+    "Name": "Quần short",
+    "ParentProductCategoryId": 2
+  },
+
+  {
+    "Name": "Quần dài",
+    "ParentProductCategoryId": 2
+  }
+]

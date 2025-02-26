@@ -13,6 +13,6 @@ public class ProductCategory : BaseEntity
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
     //Principal
-    public ICollection<Product> Products { get; } = new List<Product>();
+    public ICollection<ProductItem> ProductItems { get; } = new List<ProductItem>();
     public ICollection<Variation> Variations { get; } = new List<Variation>();
 }

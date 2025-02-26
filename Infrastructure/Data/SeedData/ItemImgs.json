@@ -1,0 +1,146 @@
+[
+    {
+        "ImageUrl":"/images/items/ao-dai-tay-the-thao.png",
+        "ProductItemId": 1
+    },
+    
+    {
+        "ImageUrl":"/images/items/ao-dai-tay-the-thao-1.png",
+        "ProductItemId": 1
+    },
+    
+    {
+        "ImageUrl":"/images/items/ao-dai-tay-the-thao-2.png",
+        "ProductItemId": 1
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-cc.png",
+        "ProductItemId": 2
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-cc-1.png",
+        "ProductItemId": 2
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-cc-2.png",
+        "ProductItemId": 2
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-nam-the-thao-phoi-bo-co-den.png",
+        "ProductItemId": 3
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-nam-the-thao-phoi-bo-co-den-1.png",
+        "ProductItemId": 3
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-thun-nam-the-thao-phoi-bo-co-den-2.png",
+        "ProductItemId": 3
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-co-tau.png",
+        "ProductItemId": 4
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-co-tau-1.png",
+        "ProductItemId": 4
+    },
+
+    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-co-tau-2.png",
+        "ProductItemId": 4
+    },
+    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-hien-dai.png",
+        "ProductItemId": 5
+    },    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-hien-dai-1.png",
+        "ProductItemId": 5
+    },
+    {
+        "ImageUrl":"/images/items/ao-so-mi-dai-tay-hien-dai-2.png",
+        "ProductItemId": 5
+    },
+    {
+        "ImageUrl":"/images/items/ao-so-mi-tay-dai-oxford.png",
+        "ProductItemId": 6
+    },
+    {
+        "ImageUrl":"/images/items/ao-so-mi-tay-dai-oxford-1.png",
+        "ProductItemId": 6
+    },
+    {
+        "ImageUrl":"/images/items/ao-so-mi-tay-dai-oxford-2.png",
+        "ProductItemId": 6
+    },
+    {
+        "ImageUrl":"/images/items/quan-cau-long.png",
+        "ProductItemId": 7
+    },
+    {
+        "ImageUrl":"/images/items/quan-cau-long-1.png",
+        "ProductItemId": 7
+    },
+    {
+        "ImageUrl":"/images/items/quan-cau-long.png-2",
+        "ProductItemId": 7
+    },
+    {
+        "ImageUrl":"/images/items/quan-short-chay-bo.png",
+        "ProductItemId": 8
+    },
+    {
+        "ImageUrl":"/images/items/quan-short-chay-bo-1.png",
+        "ProductItemId": 8
+    },
+    {
+        "ImageUrl":"/images/items/quan-short-chay-bo-2.png",
+        "ProductItemId": 8
+    },
+    
+    {
+        "ImageUrl":"/images/items/quan-short-ecc.png",
+        "ProductItemId": 9
+    },
+    {
+        "ImageUrl":"/images/items/quan-short-ecc-1.png",
+        "ProductItemId": 9
+    },
+    {
+        "ImageUrl":"/images/items/quan-short-ecc-2.png",
+        "ProductItemId": 9
+    },
+    {
+        "ImageUrl":"/images/items/quan-jogger-ecc.png",
+        "ProductItemId": 10
+    },
+    {
+        "ImageUrl":"/images/items/quan-jogger-ecc-1.png",
+        "ProductItemId": 10
+    },
+    {
+        "ImageUrl":"/images/items/quan-jogger-ecc-2.png",
+        "ProductItemId": 10
+    },
+    {
+        "ImageUrl":"/images/items/quan-giu-nhiet.png",
+        "ProductItemId": 11
+    },
+    {
+        "ImageUrl":"/images/items/quan-giu-nhiet-1.png",
+        "ProductItemId": 11
+    },
+    {
+        "ImageUrl":"/images/items/quan-giu-nhiet-2.png",
+        "ProductItemId": 11
+    }
+
+]

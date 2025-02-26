@@ -10,7 +10,7 @@ public class VariationOptConfig : IEntityTypeConfiguration<VariationOpt>
     public void Configure(EntityTypeBuilder<VariationOpt> builder)
     {
         builder.HasKey(i=>i.Id);
-        builder.Property(i=> i.Value).HasMaxLength(50);
+        builder.Property(i=> i.Value).HasMaxLength(50).IsRequired();
 
         builder.Property(p => p.CreatedBy).HasMaxLength(255);
 		builder.Property(p => p.CreatedDate);

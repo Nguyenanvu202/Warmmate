@@ -10,7 +10,7 @@ public class VariationConfig : IEntityTypeConfiguration<Variation>
     public void Configure(EntityTypeBuilder<Variation> builder)
     {
         builder.HasKey(i => i.Id);
-        builder.Property(i => i.Name);
+        builder.Property(i => i.Name).HasMaxLength(50).IsRequired();
 
         builder.Property(p => p.CreatedBy).HasMaxLength(255);
 		builder.Property(p => p.CreatedDate);
@@ -20,7 +20,6 @@ public class VariationConfig : IEntityTypeConfiguration<Variation>
         builder
         .HasOne(i=>i.ProductCategory)
         .WithMany(i=>i.Variations)
-        .HasForeignKey(i => i.ProductCategoryId)
-        .IsRequired();
+        .HasForeignKey(i => i.ProductCategoryId);
     }
 }
