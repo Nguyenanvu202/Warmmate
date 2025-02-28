@@ -1,3 +1,5 @@
+using Core.Entities;
+using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
 using Infrastructure.Data.Repository;
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<StoreContext>(opt =>{
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<IItemRepo, ItemRepo>();
 builder.Services.AddScoped<IOptionRepo, OptionRepo>();
+builder.Services.AddScoped(typeof(IGenericRepo<>),typeof(GenericRepo<>));
 // // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();

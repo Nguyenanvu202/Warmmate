@@ -7,7 +7,7 @@ public interface IItemRepo
 {
     Task<IReadOnlyList<ProductItem>> GetItemsAsync(int[] optionsId);
     Task<IReadOnlyList<ProductItem>> GetItemsByCategoryId(int categoryId);
-    Task<IReadOnlyList<ProductItem>> GetItemsByColorId(int colorId);
+    Task<IReadOnlyList<VariationOpt>> GetOptionsByVariation(string? name);
     Task<ProductItem?> GetItemById( int Id);
     void AddItem( ProductItem item);
     void UpdateItem(ProductItem item );
