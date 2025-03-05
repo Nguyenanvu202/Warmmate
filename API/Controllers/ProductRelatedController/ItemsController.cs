@@ -1,3 +1,4 @@
+using API.RequestHelper;
 using Core.Entities;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
@@ -7,47 +8,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.ProductRelatedController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ItemsController(IGenericRepo<ProductItem> _itemRepo) : ControllerBase
+    
+    public class ItemsController(IGenericRepo<ProductItem> _itemRepo) : BaseAPIController
     {
-        // [HttpGet]
-        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] int[] optionsId)
-        // {
-        //     Console.WriteLine($"OptionsId: {string.Join(",", optionsId)}"); // Ghi log giá trị
-        //     var items = await _itemRepo.GetAllAsync();
-
-        //     if (items == null || !items.Any())
-        //         return NotFound(); // Hoặc trả về một phản hồi tùy chỉnh
-
-        //     return Ok(items);
-        // }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] string[] options)
+        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] ProductSpecificationParams specParams)
         {
-            IReadOnlyList<ProductItem> items;
 
-            if (options != null && options.Length > 0)
-            {
-                var spec = new ProductSpecification(options);
-                items = await _itemRepo.GetAllBySpec(spec);
-            }
-            else
-            {
-                items = await _itemRepo.GetAllAsync();
-            }
-
-            return Ok(items);
+            var spec = new ProductSpecification(specParams);
+            return Ok(await CreatePageResult(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
         }
-        // [HttpGet("collection/{Id:int}")]
-        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(int Id)
-        // {
-        //     return Ok(await _repo.GetByIdAsync(Id));
-        // }
+
+ 
+        [HttpGet("collection/{Id:int}")]
+        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(int Id)
+        {
+            var spec = new ProductGetByParent(Id);
+            return Ok(await _itemRepo.GetAllBySpec(spec));
+        }
 
         [HttpGet("{name}")]
-        public async Task<ActionResult<IReadOnlyList<VariationOpt>>> GetOptions( string name)
+        public async Task<ActionResult<IReadOnlyList<VariationOpt>>> GetOptions(string name)
         {
             var spec = new OptionsSpecification(name);
             return Ok(await _itemRepo.GetAllBySpec(spec));

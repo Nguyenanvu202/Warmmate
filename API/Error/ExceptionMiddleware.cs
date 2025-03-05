@@ -1,0 +1,37 @@
+using System;
+using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+
+namespace API.Error;
+
+public class ExceptionMiddleware(IHostEnvironment env, RequestDelegate next)
+{
+    public async Task InvokeAsync(HttpContext context){
+        //this going to be use as a middleware when it pass request on it
+        try
+        {
+            await next(context);
+        }
+        catch (System.Exception ex)
+        {
+            
+            await HanddleExceptionAsync(context, ex, env);
+        }
+    }
+
+    private static Task HanddleExceptionAsync(HttpContext context, Exception ex, IHostEnvironment env)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        var response = env.IsDevelopment()
+        ? new ApiErrorResponse(context.Response.StatusCode,ex.Message, ex.StackTrace)
+        :new ApiErrorResponse(context.Response.StatusCode, ex.Message, "Internal Server Error");
+
+        var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
+        var json = JsonSerializer.Serialize(response, options);
+        return context.Response.WriteAsync(json);
+    }
+}

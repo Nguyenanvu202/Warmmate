@@ -1,3 +1,4 @@
+using API.Error;
 using Core.Entities;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
@@ -14,10 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>{
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<IItemRepo, ItemRepo>();
-builder.Services.AddScoped<IOptionRepo, OptionRepo>();
 builder.Services.AddScoped(typeof(IGenericRepo<>),typeof(GenericRepo<>));
+builder.Services.AddCors();
 // // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -34,7 +34,10 @@ var app = builder.Build();
 //app.UseHttpsRedirection(); //that is using for redirect http to https
 
 //app.UseAuthorization();
-
+app.UseMiddleware<ExceptionMiddleware>();
+//allow header: any http header will be allow, Method: any method will me allow (post, put, get...), WithOrigins: another url
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+    .WithOrigins("http://localhost:4200","https://localhost:4200"));
 app.MapControllers();
 try
 {
