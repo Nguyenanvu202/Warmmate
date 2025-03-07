@@ -1,12 +1,9 @@
 using API.Error;
-using Core.Entities;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
 using Infrastructure.Data.Repository;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +15,9 @@ builder.Services.AddDbContext<StoreContext>(opt =>{
 builder.Services.AddScoped<IItemRepo, ItemRepo>();
 builder.Services.AddScoped(typeof(IGenericRepo<>),typeof(GenericRepo<>));
 builder.Services.AddCors();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -41,7 +41,7 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
 app.MapControllers();
 try
 {
-    using var scope = app.Services.CreateScope();
+    using var scope = app.Services.CreateScope();  
     
         var services = scope.ServiceProvider;
         var _storeContext = services.GetRequiredService<StoreContext>();

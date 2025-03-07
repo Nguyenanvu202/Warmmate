@@ -5,7 +5,7 @@ namespace Core.IRepository.ProductRelateRepo;
 
 public interface IItemRepo
 {
-    Task<IReadOnlyList<ProductItem>> GetItemsAsync(int[] optionsId);
+    Task<ProductItem> GetItemsAsync(int id);
     Task<IReadOnlyList<ProductItem>> GetItemsByCategoryId(int categoryId);
     Task<IReadOnlyList<VariationOpt>> GetOptionsByVariation(string? name);
     Task<ProductItem?> GetItemById( int Id);

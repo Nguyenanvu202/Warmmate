@@ -24,7 +24,11 @@ public class ProductItemConfig : IEntityTypeConfiguration<ProductItem>
         .HasOne(p => p.ProductCategory)
         .WithMany(p => p.ProductItems)
         .HasForeignKey(i => i.ProductCategoryId);
-
+        //Relation with ProductImgs
+        builder
+        .HasMany(i => i.ProductItemImgs)
+        .WithOne(i => i.ProductItem)
+        .HasForeignKey(i => i.ProductItemId);
         //Many to many relation
         builder
         .HasMany(e => e.VariationOpts)

@@ -16,10 +16,6 @@ public class ItemImgConfig : IEntityTypeConfiguration<ProductItemImg>
 		builder.Property(p => p.CreatedDate);
 		builder.Property(p => p.UpdatedBy).HasMaxLength(255);
 		builder.Property(p => p.UpdatedDate); 
-        //Relation with ProductItem
-        builder
-        .HasOne(p => p.ProductItem)
-        .WithMany(p => p.ProductItemImgs)
-        .HasForeignKey(p=>p.ProductItemId);
+
     }
 }

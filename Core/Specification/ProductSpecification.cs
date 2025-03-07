@@ -11,6 +11,8 @@ public class ProductSpecification : BaseSpecification<ProductItem>
     Any(opt => specParams.Options.Contains(opt.Value)))
     {
         ApplyPagination(specParams.PageSize *(specParams.PageIndex -1), specParams.PageSize);
+        AddInclude(p => p.ProductItemImgs);
+        AddInclude(p => p.VariationOpts);
     }
 
 }

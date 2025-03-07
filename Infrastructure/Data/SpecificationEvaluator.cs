@@ -18,7 +18,12 @@ public class SpecificationEvaluator<T> where T : BaseEntity
         {
             query = query.Skip(spec.Skip).Take(spec.Take);
         }
+        if(spec.Includes != null){
 
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+        }
+
+        // Apply IncludeStrings (for string-based includes)
         return query;
 
 

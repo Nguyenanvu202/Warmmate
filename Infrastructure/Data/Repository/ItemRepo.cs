@@ -32,20 +32,12 @@ public class ItemRepo(StoreContext storeContext) : IItemRepo
     // }
 
 
-    public async Task<IReadOnlyList<ProductItem>> GetItemsAsync(int[] optionsId)
-    {
-        var query = _storeContext.ProductItems.AsQueryable();
-        if (optionsId != null)
-        {
-            foreach (var optionId in optionsId)
-            {
-                query.Where(x => x.VariationOpts.Any(p => p.Id == optionId));
-                
-            }
-            ;
-        }
-
-        return await query.Distinct().ToListAsync();
+    public async Task<ProductItem> GetItemsAsync(int id)
+    {        
+        return await _storeContext.ProductItems
+        .Include(x => x.ProductItemImgs) // Include ProductItemImgs
+        .Include(x => x.VariationOpts)   // Include VariationOpts
+        .FirstOrDefaultAsync(x=>x.Id == id);
     }
 
     public async Task<IReadOnlyList<ProductItem>> GetItemsByCategoryId(int CategoryId)

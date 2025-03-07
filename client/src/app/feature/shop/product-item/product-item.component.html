@@ -1,0 +1,13 @@
+@if(item){
+
+    <div class="item1 ">
+        <div class="image">
+            <img src="{{item.productItemImgs[0].imageUrl}}" alt="item" style="height: 100%;">
+        </div>
+
+        <div class="content">
+            <div class="title font-mono text-sm font-normal">{{item.name}} </div>
+            <div class="price text-sm font-bold">{{item.price}}$</div>
+        </div>
+    </div>
+}

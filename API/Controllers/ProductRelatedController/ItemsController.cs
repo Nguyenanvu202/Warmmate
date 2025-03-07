@@ -1,3 +1,4 @@
+using API.DTOs;
 using API.RequestHelper;
 using Core.Entities;
 using Core.IRepository;
@@ -12,14 +13,26 @@ namespace API.Controllers.ProductRelatedController
     public class ItemsController(IGenericRepo<ProductItem> _itemRepo) : BaseAPIController
     {
 
+        // [HttpGet]
+        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] ProductSpecificationParams specParams)
+        // {
+
+        //     var spec = new ProductSpecification(specParams);
+        //     return Ok(await CreatePageResult(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
+        // }
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] ProductSpecificationParams specParams)
+        public async Task<ActionResult<IReadOnlyList<ItemDTO>>> GetItems([FromQuery] ProductSpecificationParams specParams)
         {
 
             var spec = new ProductSpecification(specParams);
             return Ok(await CreatePageResult(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
         }
+        // [HttpGet]
+        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems()
+        // {
 
+        //     return Ok(await repo.GetItemsAsync(1));
+        // }
  
         [HttpGet("collection/{Id:int}")]
         public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(int Id)
