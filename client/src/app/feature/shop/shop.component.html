@@ -1,13 +1,26 @@
 <div class="collection">
     <div class="collection px-[4.5%] grid grid-cols-6">
-        <div class="left col-span-2">
-            
+        <div class="left col-span-2 pr-4">
+            <app-filtering-panel   (selectedOptionsChange)="onOptionsSelectionChange($event)">>
+                
+            </app-filtering-panel>
         </div>
         <div class="right col-span-4 grid grid-cols-4 gap-1">
-            @for (item of products; track item.id) {
+            @for (item of products?.data; track $index) {
 
                 <app-product-item [item]="item"></app-product-item>
             }
         </div>
+    </div>
+    <div class="pagination place-self-center bg-transparent">
+        <mat-paginator
+        (page)="handlePageEvent($event)"
+        [length]="products?.count"
+        [pageSize]="shopParams.pageSize"
+        [showFirstLastButtons]="true"
+        [pageIndex]="shopParams.pageNumber -1"
+        [pageSizeOptions]="[8, 16, 24, 32]"
+        aria-label="Select page"
+        ></mat-paginator>
     </div>
 </div>

@@ -1,5 +1,6 @@
 using API.Controllers.ProductRelatedController;
 using API.DTOs;
+using AutoMapper;
 using Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
 
-    public class BugHandleController : BaseAPIController
+    public class BugHandleController(IMapper mapper) : BaseAPIController(mapper)
     {
         [HttpGet("unauthorize")]
         public IActionResult GetUnauthorize()

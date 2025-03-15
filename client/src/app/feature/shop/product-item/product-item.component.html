@@ -1,13 +1,20 @@
 @if(item){
 
-    <div class="item1 ">
-        <div class="image">
-            <img src="{{item.productItemImgs[0].imageUrl}}" alt="item" style="height: 100%;">
-        </div>
+<div class="item1">
+  <div class="image">
+    <img
+      [ngSrc]="item.productItemImgs[0].imageUrl"
+      alt="{{item.name}}"
+      width="400"
+      height="533"
+      ngSrcset="400w, 800w, 1536w"
+      sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1536px"
+    />
+  </div>
 
-        <div class="content">
-            <div class="title font-mono text-sm font-normal">{{item.name}} </div>
-            <div class="price text-sm font-bold">{{item.price}}$</div>
-        </div>
-    </div>
+  <div class="content">
+    <div class="title font-mono text-sm font-normal">{{ item.name }}</div>
+    <div class="price text-sm font-bold">{{ item.price }}$</div>
+  </div>
+</div>
 }

@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace API.DTOs;
 
-public class OptDTO
+public class VariationDTO
 {
     [Required]
-    public string Value { get; set; } = string.Empty;
-
-
-
+    public string name { get; set; } = string.Empty;
 }

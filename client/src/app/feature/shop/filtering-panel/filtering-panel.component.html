@@ -1,0 +1,31 @@
+<mat-accordion multi>
+    <mat-expansion-panel
+      (opened)="panelOpenState.set(true)"
+      (closed)="panelOpenState.set(false)"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Màu sắc </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-selection-list [ngModel]="selectedColors" (selectionChange)="onColorSelectionChange($event)">
+        @for (color of shopService.colors; track $index) {
+          <mat-list-option [value]="color.value">{{color.value}}</mat-list-option>
+      }
+      </mat-selection-list>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel
+    (opened)="panelOpenState.set(true)"
+    (closed)="panelOpenState.set(false)"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Kích cỡ </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-selection-list [ngModel]="selectedSizes" (selectionChange)="onSizeSelectionChange($event)" >
+      @for (color of shopService.sizes; track $index) {
+        <mat-list-option [value]="color.value">{{color.value}}</mat-list-option>
+    }
+    </mat-selection-list>
+  </mat-expansion-panel>
+    
+  </mat-accordion>

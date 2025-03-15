@@ -1,0 +1,11 @@
+// Remove the border from mat-expansion-panel
+.mat-expansion-panel {
+    border: none !important; // Remove the border
+    box-shadow: none !important; // Optional: Remove the shadow if needed
+    background: none;
+  }
+  
+  // Optional: Remove the border from the expansion panel header
+  .mat-expansion-panel-header {
+    border-bottom: none !important;
+  }

@@ -1,4 +1,6 @@
+using API.DTOs;
 using API.Error;
+using AutoMapper;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
@@ -18,6 +20,15 @@ builder.Services.AddCors();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<GenericMappingProfiles>();
+var mapperConfig = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new GenericMappingProfiles());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 // // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();

@@ -16,5 +16,11 @@ import { ShopComponent } from "./feature/shop/shop.component";
 })
 export class AppComponent {
   title = 'WarmMate';
+  searchValue: string = '';
+  onSearch(searchName: string): void {
+    console.log('Search value:', searchName);
+    this.searchValue = searchName;
+    console.log('Search name:', this.searchValue);
+  }
 
 }

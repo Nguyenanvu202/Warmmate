@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.RequestHelper;
+using AutoMapper;
 using Core.Entities;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
@@ -10,9 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers.ProductRelatedController
 {
     
-    public class ItemsController(IGenericRepo<ProductItem> _itemRepo) : BaseAPIController
+    public class ItemsController(IGenericRepo<ProductItem> _itemRepo, IMapper mapper) : BaseAPIController(mapper)
     {
-
         // [HttpGet]
         // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] ProductSpecificationParams specParams)
         // {
@@ -25,7 +25,7 @@ namespace API.Controllers.ProductRelatedController
         {
 
             var spec = new ProductSpecification(specParams);
-            return Ok(await CreatePageResult(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
+            return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
         }
         // [HttpGet]
         // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems()
@@ -42,10 +42,11 @@ namespace API.Controllers.ProductRelatedController
         }
 
         [HttpGet("{name}")]
-        public async Task<ActionResult<IReadOnlyList<VariationOpt>>> GetOptions(string name)
+        public async Task<ActionResult<IReadOnlyList<OptDTO>>> GetOptions(string name)
         {
             var spec = new OptionsSpecification(name);
-            return Ok(await _itemRepo.GetAllBySpec(spec));
+            
+            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
         }
 
         // [HttpGet("{name}")]

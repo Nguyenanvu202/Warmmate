@@ -26,7 +26,7 @@ public class ProductSpecificationParams
         get => _options; //options = M%Xanh%Do%S
         set
         {
-            _options = value.SelectMany(x => x.Split('%', StringSplitOptions.RemoveEmptyEntries)).ToList();
+            _options = value.SelectMany(x => x.Split(',', StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
     }
 
