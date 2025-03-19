@@ -5,9 +5,11 @@ namespace Core.Specification;
 
 public class ProductGetByParent : BaseSpecification<ProductItem>
 {
-    public ProductGetByParent(int Id) : base (x => x.ProductCategory.Id == Id)
+    public ProductGetByParent(ProductSpecificationParams specParams, int Id) : base (x => x.ProductCategory.ParentProductCategoryId == Id)
     {
-        //ao => ao thun => detail
+        ApplyPagination(specParams.PageSize *(specParams.PageIndex -1), specParams.PageSize);
+        AddInclude(p => p.ProductItemImgs);
+        AddInclude(p => p.VariationOpts);
     }
     
 }

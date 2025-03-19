@@ -1,6 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "tailwindcss";
+.mat-mdc-snack-bar-container.snack-error {
+  --mdc-snackbar-container-color: rgb(197, 51, 51);
+  --mdc-snackbar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+.mat-mdc-snack-bar-container.snack-success {
+  --mdc-snackbar-container-color: green;
+  --mdc-snackbar-button-color: white;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: black;
+}

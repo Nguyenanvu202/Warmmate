@@ -3,6 +3,7 @@
 <div class="item1">
   <div class="image">
     <img
+    routerLink="/detail/{{ item.id }}"
       [ngSrc]="item.productItemImgs[0].imageUrl"
       alt="{{item.name}}"
       width="400"

@@ -1,0 +1,18 @@
+<section class="px-16 py-8 text-center">
+  @if(productItem){
+
+    <div class="grid grid-cols-2 grid-rows-1 gap-24">
+      <div class="left">
+         <ul>
+          @for (item of productItem.productItemImgs; track $index) {
+
+            <li>
+              <img src="{{item.imageUrl}}" alt="product image" class="w-64 h-64">
+            </li>
+          }
+         </ul> 
+        </div>
+      </div>
+    }
+    <div>2</div>
+</section>

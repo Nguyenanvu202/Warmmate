@@ -13,13 +13,7 @@ namespace API.Controllers.ProductRelatedController
     
     public class ItemsController(IGenericRepo<ProductItem> _itemRepo, IMapper mapper) : BaseAPIController(mapper)
     {
-        // [HttpGet]
-        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems([FromQuery] ProductSpecificationParams specParams)
-        // {
 
-        //     var spec = new ProductSpecification(specParams);
-        //     return Ok(await CreatePageResult(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
-        // }
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<ItemDTO>>> GetItems([FromQuery] ProductSpecificationParams specParams)
         {
@@ -27,19 +21,23 @@ namespace API.Controllers.ProductRelatedController
             var spec = new ProductSpecification(specParams);
             return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
         }
-        // [HttpGet]
-        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetItems()
-        // {
 
-        //     return Ok(await repo.GetItemsAsync(1));
-        // }
  
+        // [HttpGet("collection/{Id:int}")]
+        // public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(
+        //     [FromQuery] ProductSpecificationParams specParams, int Id)
+        // {
+        //     var spec = new ProductGetByParent(specParams,Id);
+        //     return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
+        // }
         [HttpGet("collection/{Id:int}")]
-        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(int Id)
+        public async Task<ActionResult<IReadOnlyList<ProductItem>>> GetProductByCategoryId(
+            [FromQuery] ProductSpecificationParams specParams, int Id)
         {
-            var spec = new ProductGetByParent(Id);
-            return Ok(await _itemRepo.GetAllBySpec(spec));
+            var spec = new ProductSpecification(specParams, Id);
+            return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
         }
+        
 
         [HttpGet("{name}")]
         public async Task<ActionResult<IReadOnlyList<OptDTO>>> GetOptions(string name)
@@ -49,16 +47,12 @@ namespace API.Controllers.ProductRelatedController
             return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
         }
 
-        // [HttpGet("{name}")]
-        // public async Task<ActionResult<IReadOnlyList<VariationOpt>>> GetOptions(string name)
-        // {
-        //     return Ok(await repo.GetOptionsByVariation(name));
-        // }
-
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<ProductItem>> GetItem(int Id)
         {
-            var item = await _itemRepo.GetByIdAsync(Id);
+
+            var spec = new ProductSpecification(Id);
+            var item = await GetResult<ProductItem,ItemDTO>(_itemRepo,spec);
             if (item == null) return NotFound();
             return item;
         }

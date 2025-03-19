@@ -7,6 +7,6 @@ export type Product = {
     quantity: number;
     description: string;
     productCategoryId:number;
-    productItemImgs: any[];
+    productItemImgs: ImageUrl[];
     variationOpts:any[];
 }

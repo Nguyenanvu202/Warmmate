@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using API.DTOs;
 using API.Error;
 using AutoMapper;
@@ -5,7 +6,10 @@ using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
 using Infrastructure.Data.Repository;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,6 +24,15 @@ builder.Services.AddCors();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
+{
+    var connString = builder.Configuration.GetConnectionString("Redis") 
+    ?? throw new Exception("Cannot get read the redis connection string");
+    var configuration = ConfigurationOptions.Parse(connString, true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
+builder.Services.AddSingleton<ICartService, CartService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<GenericMappingProfiles>();
 var mapperConfig = new MapperConfiguration(cfg =>

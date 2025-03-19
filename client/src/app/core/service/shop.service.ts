@@ -28,6 +28,10 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber);
     return this.http.get<any>(this.baseUrl + 'items', {params})
   }
+
+  getProductById(id: number){
+    return this.http.get<any>(this.baseUrl + 'items/' + id);
+  }
   getColor(){
     if(this.colors.length > 0) return;
     return this.http.get<any>(this.baseUrl + 'items/color').subscribe({

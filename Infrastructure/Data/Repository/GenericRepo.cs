@@ -72,7 +72,7 @@ public class GenericRepo<T>(StoreContext _storeContext) : IGenericRepo<T> where 
     }
 
     private IQueryable<TResult> ApplySpec<TResult>(ISpecification<T, TResult> spec){
-
+                  
         return SpecificationEvaluator<T>.GetQuery<T,TResult>(_storeContext.Set<T>().AsQueryable(),spec);
     }
 

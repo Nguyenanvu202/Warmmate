@@ -1,12 +1,13 @@
-<div class="header bg-white px-[5%] border-b border-gray-200">
+<header class="header bg-white px-[5%] border-b border-gray-200 fixed top-0 z-50 w-full h-[90px]">
     <div class="header_inner justify-between flex h-[86px]">
-        <div class="logo content-center"><img src="/images/navbar/logo.png" alt="app-logo" style="height: 60%;"></div>
+        <div  class="logo content-center cursor-pointer"><img routerLink="/" src="/images/navbar/logo.png" alt="app-logo" style="height: 60%;"></div>
         <div class="navigation content-center">
             <ul class="flex gap-3 font-medium text-sm">
-                <li><a href="#">Men</a></li>
+                <li><a routerLink="/shop" routerLinkActive="active" >Men</a></li>
                 <li><a href="#">Woman</a></li>
                 <li><a href="#">Sport</a></li>
                 <li><a href="#">Care&Share</a></li>
+                <li><a routerLink="/test-errors" routerLinkActive="active" >Test Errors</a></li>
             </ul> 
         </div>
         <div class="action flex gap-3 items-center">
@@ -40,4 +41,8 @@
             </div>
         </div>
     </div>
-</div>
+</header>
+@if(busyService.loading === true){
+    <mat-progress-bar class="fixed top-[90px] z-50" mode="indeterminate"></mat-progress-bar>
+}
+

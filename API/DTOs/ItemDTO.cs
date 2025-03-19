@@ -7,6 +7,8 @@ namespace API.DTOs;
 public class ItemDTO
 {
     [Required]
+    public int id { get; set; }
+    [Required]
     public string Name { get; set; } = string.Empty;
     [Range(0.1, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
     public decimal Price { get; set; }
@@ -14,6 +16,11 @@ public class ItemDTO
     public int Quantity { get; set; }
     [Required]
     public string Description { get; set; } = string.Empty;
+
+    [Required]
+    public string ProductCategoryId { get; set; } = string.Empty;
+    [Required]
+    public ProductCategory? ProductCategory { get; set; }
 
     [Required]
     public ICollection<ImgDTO> ProductItemImgs { get; } = new List<ImgDTO>();

@@ -7,7 +7,6 @@
         </div>
         <div class="right col-span-4 grid grid-cols-4 gap-1">
             @for (item of products?.data; track $index) {
-
                 <app-product-item [item]="item"></app-product-item>
             }
         </div>

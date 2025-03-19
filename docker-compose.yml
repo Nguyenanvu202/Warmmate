@@ -1,0 +1,7 @@
+version: '3.8'   # Specify Docker Compose version (optional, but good practice)
+
+services:   # The services key is a map
+  redis:   # The service name, which in this case is redis
+    image: redis:latest   # The image to use for the Redis container
+    ports:  
+      - "6379:6379" 

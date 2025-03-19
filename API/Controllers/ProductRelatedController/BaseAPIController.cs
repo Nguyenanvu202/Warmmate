@@ -32,4 +32,10 @@ public class BaseAPIController(IMapper mapper) : ControllerBase
         var dtos = mapper.Map<List<TDto>>(items);
         return Ok(dtos);
     }
+
+    protected async Task<ActionResult> GetResult<T,TDto>(IGenericRepo<T> repo, ISpecification<T> spec) where T:BaseEntity{
+        var item = await repo.GetBySpec(spec);
+        var dto = mapper.Map<TDto>(item);
+        return Ok(dto);
+    }
 }
