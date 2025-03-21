@@ -27,3 +27,7 @@ body {
 .mat-mdc-progress-bar {
   --mdc-linear-progress-active-indicator-color: black;
 }
+
+.mdc-notched-outline__notch {
+  border-right-style: none !important
+}

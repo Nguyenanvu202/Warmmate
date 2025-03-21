@@ -32,7 +32,7 @@ export class ShopService {
   getProductById(id: number){
     return this.http.get<any>(this.baseUrl + 'items/' + id);
   }
-  getColor(){
+  getColorOption(){
     if(this.colors.length > 0) return;
     return this.http.get<any>(this.baseUrl + 'items/color').subscribe({
       next: response => this.colors = response.value
@@ -40,15 +40,22 @@ export class ShopService {
     })
   }
 
-  getSize(){
+  getSizeOption(){
     if(this.sizes.length > 0) return;
     return this.http.get<any>(this.baseUrl + 'items/size').subscribe({
 
       next: response => {
         console.log(response.value),
         this.sizes = response.value}
-    }
-    )
+    })
+  }
+
+  getSizeByProduct(productId: number){
+    return this.http.get<any>(this.baseUrl + 'items/' + productId +'/'+  1)
+  }
+
+  getColorByProduct(productId: number){
+    return this.http.get<any>(this.baseUrl + 'items/' + productId +'/'+ 2);
   }
  
 }

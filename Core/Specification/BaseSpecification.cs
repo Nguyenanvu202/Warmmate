@@ -50,9 +50,14 @@ public class BaseSpecification<T, TResult>(Expression<Func<T, bool>>? criteria) 
 
     public Expression<Func<T, IEnumerable<TResult>>>? SelectMany {get; private set;}
 
+
     protected void AddSelectMany(Expression<Func<T, IEnumerable<TResult>>> selectExpression){
         SelectMany = selectExpression;
         
+    }
+
+    protected void AddSelect(Expression<Func<T,TResult>> selectExpression){
+        Select = selectExpression;
     }
     
 

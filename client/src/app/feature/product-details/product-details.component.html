@@ -1,18 +1,84 @@
-<section class="px-16 py-8 text-center">
+<section class="px-16 text-last-left">
   @if(productItem){
 
-    <div class="grid grid-cols-2 grid-rows-1 gap-24">
-      <div class="left">
-         <ul>
-          @for (item of productItem.productItemImgs; track $index) {
+  <div class="grid grid-cols-2 gap-[24px]">
+    <div class="left">
+      <ul>
+        @for (item of productItem.productItemImgs; track $index) {
 
-            <li>
-              <img src="{{item.imageUrl}}" alt="product image" class="w-64 h-64">
-            </li>
-          }
-         </ul> 
-        </div>
+        <li>
+          <img
+            src="{{ item.imageUrl }}"
+            alt="product image"
+            class="w-64 h-64"
+          />
+        </li>
+        }
+      </ul>
+    </div>
+
+    <div class="product-sumary">
+      <h1 class="Title text-2xl font-medium mb-[16px]">
+        {{ productItem.name }}
+      </h1>
+      <p>You have {{ quantityInCart }} of this item in your cart</p>
+      <div class="price mb-[12px] text-2xl font-medium">
+        {{ productItem.price }}.000đ
       </div>
-    }
-    <div>2</div>
+      <div class="color">
+        <div>Màu sắc:</div>
+        <mat-button-toggle-group
+          name="favoriteColor"
+          aria-label="Favorite Color"
+          [(value)]="selectedColor"
+          (change)="onColorSelected($event)"
+          [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+        >
+          @if(productColor){ @for (color of productColor; track $index) {
+          <mat-button-toggle value="{{ color.value }}">{{
+            color.value
+          }}</mat-button-toggle>
+          } }
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="Size">
+        <div>Kích thước:</div>
+        <mat-button-toggle-group
+          name="favoriteColor"
+          aria-label="Favorite Color"
+          [(value)]="selectedSize"
+          (change)="onSizeSelected($event)"
+          [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+        >
+          @if(productSize){ @for (size of productSize; track $index) {
+          <mat-button-toggle value="{{ size.value }}">{{
+            size.value
+          }}</mat-button-toggle>
+          } }
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="flex gap-4 mt-6">
+        <button
+          [disabled]="quantity === quantityInCart"
+          (click)="updateCart()"
+          mat-fab
+          extended
+          class="match-input-height"
+        >
+          <!-- <mat-icon>shopping_cart</mat-icon> -->
+          {{ getButtonText() }}
+        </button>
+
+        <mat-form-field appearance="outline" class="flex">
+          <mat-label>Quantity</mat-label>
+          <input matInput min="0" [(ngModel)]="quantity" type="number" />
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <p class="mb-6">{{ productItem.description }}</p>
+    </div>
+  </div>
+  }
 </section>

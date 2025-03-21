@@ -43,6 +43,12 @@ public class SpecificationEvaluator<T> where T : BaseEntity
         {
             selectQuery = query.SelectMany(spec.SelectMany);
         }
+
+        if (spec.Select != null)
+        {
+            selectQuery = query.Select(spec.Select);
+        }
+        
         if (spec.IsDistinct)
         {
             selectQuery = selectQuery?.Distinct();

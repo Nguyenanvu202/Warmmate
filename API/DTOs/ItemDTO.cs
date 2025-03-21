@@ -19,8 +19,6 @@ public class ItemDTO
 
     [Required]
     public string ProductCategoryId { get; set; } = string.Empty;
-    [Required]
-    public ProductCategory? ProductCategory { get; set; }
 
     [Required]
     public ICollection<ImgDTO> ProductItemImgs { get; } = new List<ImgDTO>();

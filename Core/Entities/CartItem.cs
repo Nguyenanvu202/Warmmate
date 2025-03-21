@@ -11,4 +11,7 @@ public class CartItem
     public required string PictureUrl { get; set; }
     public required string Color { get; set; }
     public required string Size { get; set; }
+
+    public int productId { get; set; }
+    public ProductItem? ProductItem { get; set; }
 }

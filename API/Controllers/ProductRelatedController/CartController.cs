@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers.ProductRelatedController
 {
 
-    public class CartController(IMapper mapper, ICartService cartService) : BaseAPIController(mapper)
+    public class CartController(IMapper mapper, ICartService cartService) : BaseAPIController(  mapper)
     {
         [HttpGet]
         public async Task<ActionResult<ShoppingCart>> GetCartById(string id)

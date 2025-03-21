@@ -46,6 +46,13 @@ namespace API.Controllers.ProductRelatedController
             
             return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
         }
+        [HttpGet("{productId:int}/{optionId:int}")]
+        public async Task<ActionResult<IReadOnlyList<OptDTO>>> GetProductOptions(int productId,int optionId)
+        {
+            var spec = new ProductSpecification(productId, optionId);
+            
+            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
+        }
 
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<ProductItem>> GetItem(int Id)

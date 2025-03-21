@@ -35,7 +35,7 @@
             <div class="account"><img src="/images/navbar/icon-account.svg"  alt="app-account"><a href="#"></a></div>
 
             <div class="cart ">
-                <a href="#" matBadge="5" matBadgesize="large">
+                <a routerLink="/cart" matBadge="{{cartService.itemCount()}}" matBadgesize="large">
                     <img src="/images/navbar/icon-cart.svg"  alt="app-cart">
                 </a>
             </div>

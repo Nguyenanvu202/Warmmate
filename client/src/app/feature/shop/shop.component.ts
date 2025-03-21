@@ -27,8 +27,8 @@ export class ShopComponent implements OnInit {
   }
 
   initializeShop(): void {
-    this.shopService.getColor();
-    this.shopService.getSize();
+    this.shopService.getColorOption();
+    this.shopService.getSizeOption();
     this.getProducts();
   }
 

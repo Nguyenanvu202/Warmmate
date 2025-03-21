@@ -15,6 +15,7 @@ import { ShopComponent } from '../../feature/shop/shop.component';
 import { SharedDataService } from '../../core/service/shared-data.service';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BusyService } from '../../core/service/busy.service';
+import { CartService } from '../../core/services/cart.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -27,6 +28,7 @@ export class HeaderComponent {
   searchValue: string = '';
   private router = inject(Router);
   @Output() searchChange = new EventEmitter<string>();
+  cartService = inject(CartService)
   private shareData = inject(SharedDataService);
   onSearch(): void {
     this.shareData.setSharedString(this.searchValue);

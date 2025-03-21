@@ -1,0 +1,26 @@
+.mat-button-toggle-group-appearance-standard{
+    --mat-standard-button-toggle-shape: 10px;
+}
+
+
+  
+  .mat-button-toggle {
+    width: 75px; /* Makes each toggle take equal space */
+    text-align: center; /* Centers the text inside the toggle */
+  }
+  
+  .mat-mdc-extended-fab {
+    --mdc-extended-fab-container-elevation-shadow:none;
+    --mdc-fab-container-color:black;
+    color: white;
+  }
+  .mdc-notched-outline__notch {
+    border-right-style: none !important;
+
+
+  }
+
+  .mat-form-field-appearance-outline{
+    --mdc-outlined-text-field-focus-outline-color:black;
+    --mdc-outlined-text-field-focus-label-text-color: black;
+  }

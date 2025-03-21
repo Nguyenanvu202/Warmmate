@@ -16,4 +16,6 @@ public interface ISpecification<T>
 }
 public interface ISpecification<T,TResult> : ISpecification<T>{
     Expression<Func<T, IEnumerable<TResult>>>? SelectMany {get;}
+    Expression<Func<T, TResult>>? Select {get;}
+    
 }

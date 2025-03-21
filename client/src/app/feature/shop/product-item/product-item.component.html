@@ -1,7 +1,7 @@
 @if(item){
 
 <div class="item1">
-  <div class="image">
+  <div class="image relative text-center mb-[15px]">
     <img
     routerLink="/detail/{{ item.id }}"
       [ngSrc]="item.productItemImgs[0].imageUrl"
@@ -10,10 +10,54 @@
       height="533"
       ngSrcset="400w, 800w, 1536w"
       sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1536px"
+      class="img1 rounded-[10px]"
     />
-  </div>
 
+    <img
+    routerLink="/detail/{{ item.id }}"
+      [ngSrc]="item.productItemImgs[1].imageUrl"
+      alt="{{item.name}}"
+      width="400"
+      height="533"
+      ngSrcset="400w, 800w, 1536w"
+      sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1536px"
+      class="img2 rounded-[10px]"
+    />
+    <div class="product-select absolute p-[12px] ]">
+      <p class="mb-[8px] font-bold text-sm">Thêm nhanh vào giỏ hàng+</p>
+      <mat-button-toggle-group
+          name="favoriteColor"
+          aria-label="Favorite Color"
+          (change)="onColorSelected($event)"
+          [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+        >
+        @if(productColor){
+          
+          @for (color of productColor; track $index) {
+            <mat-button-toggle value="{{color.value}}" (click)="cartService.addItemtoCart(item, selectedColor, selectedSize)" value="{{color.value}}">{{color.value}}</mat-button-toggle>
+          }
+        }
+      </mat-button-toggle-group>
+    </div>
+
+ 
+
+  </div>
   <div class="content">
+    <mat-button-toggle-group
+    name="favoriteColor"
+    aria-label="Favorite Color"
+    [(value)]="selectedSize"
+    (change)="onSizeSelected($event)"
+    [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+  >
+  @if(productSize){
+    
+    @for (size of productSize; track $index) {
+      <mat-button-toggle value="{{size.value}}">{{size.value}}</mat-button-toggle>
+    }
+  }
+</mat-button-toggle-group>
     <div class="title font-mono text-sm font-normal">{{ item.name }}</div>
     <div class="price text-sm font-bold">{{ item.price }}$</div>
   </div>
