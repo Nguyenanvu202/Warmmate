@@ -2,18 +2,21 @@ using System;
 using System.Net.Http.Headers;
 using Core.Entities;
 using Infrastructure.Config.ProductConfig;
+
 using Infrastructure.Config.ProductConfiguration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Data;
 
-public class StoreContext : DbContext
+public class StoreContext : IdentityDbContext<AppUser>
 {
-    public StoreContext(DbContextOptions options) : base(options)
+    public StoreContext(DbContextOptions<StoreContext> options) : base(options)
     {
         
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ItemImgConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductCategoryConfig).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductItemConfig).Assembly);
@@ -28,4 +31,5 @@ public class StoreContext : DbContext
     public DbSet<ProductItemImg> ProductItemImgs { get; set; }
     public DbSet<Variation> Variations { get; set; }
     public DbSet<VariationOpt> VariationOpts { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 }

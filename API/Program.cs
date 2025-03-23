@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using API.DTOs;
 using API.Error;
 using AutoMapper;
+using Core.Entities;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
@@ -35,6 +36,8 @@ builder.Services.AddSingleton<ICartService, CartService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<GenericMappingProfiles>();
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
 var mapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile(new GenericMappingProfiles());
@@ -60,9 +63,10 @@ var app = builder.Build();
 //app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
 //allow header: any http header will be allow, Method: any method will me allow (post, put, get...), WithOrigins: another url
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200","https://localhost:4200"));
 app.MapControllers();
+app.MapGroup("api").MapIdentityApi<AppUser>();
 try
 {
     using var scope = app.Services.CreateScope();  

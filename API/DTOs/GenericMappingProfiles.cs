@@ -31,6 +31,13 @@ public class GenericMappingProfiles:Profile
 
         // Map Variation to VariationDTO
         CreateMap<Variation, VariationDTO>().ReverseMap();
+
+        //Map AppUser to RegisterDTO
+        CreateMap<RegisterDTO, AppUser>()
+        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email)).ReverseMap();
+        
+        CreateMap<AddressDTO, Address>();
+        CreateMap<Address, AddressDTO>();
     }
 
    
