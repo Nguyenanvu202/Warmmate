@@ -1,0 +1,19 @@
+.mat-mdc-unelevated-button:not(:disabled){
+    --mdc-filled-button-container-color: black;
+
+}
+.mat-mdc-button:not(:disabled){
+    --mdc-text-button-label-text-color: black;
+}
+.mat-form-field-appearance-outline{
+    --mdc-outlined-text-field-focus-outline-color:black;
+    --mdc-outlined-text-field-focus-label-text-color: black;
+  }
+
+  .mat-mdc-unelevated-button, .mat-mdc-unelevated-button .mdc-button__ripple {
+    --mdc-filled-button-container-shape: 8px;
+  }
+
+  .mat-mdc-button, .mat-mdc-button .mdc-button__ripple {
+   --mdc-text-button-container-shape: 8px;
+  }

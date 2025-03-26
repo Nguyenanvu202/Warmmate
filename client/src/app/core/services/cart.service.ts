@@ -61,7 +61,7 @@ totals = computed(() => {
     }
   }
   deleteCart() {
-    this.http.delete(this.baseUrl + 'cart?id=' + this.cart()?.id).subscribe({
+    this.http.delete(this.baseUrl+ '/' + 'cart?id=' + this.cart()?.id).subscribe({
       next: () =>{
         localStorage.removeItem('cart_id');
         this.cart.set(null);
@@ -90,25 +90,34 @@ totals = computed(() => {
     }
     return items
   }
-private mapProductToCartItem(product: Product, color: string, size: string, items: CartItem[]): CartItem{
-  const existItem = items.find((x) =>  x.productId === product.id && x.color === color && x.size === size);
-  if(existItem){
-    return existItem;
+  private mapProductToCartItem(product: any, color: string, size: string, items: CartItem[]): CartItem {
+    console.log("Checking for existing item with Product ID:", product.productId, "Color:", color, "Size:", size);
+    
+    const existProduct = items.find((x) => x.productId === product.id || x.productId === product.productId  && x.color === color && x.size === size);
+    console.log("existItem found: ", existProduct);
+  
+    if (existProduct != null) {
+      console.log("Item exists:", existProduct);
+      return existProduct;
+    }
+    
+    console.log("Item does not exist, creating new item");
+    
+    this.lastItemId += 1; // Increment the last used itemId
+    localStorage.setItem('lastItemId', this.lastItemId.toString());
+    
+    return {
+      itemId: this.lastItemId,
+      productName: product.name,
+      price: product.price,
+      quantity: 0,
+      pictureUrl: product.productItemImgs[0].imageUrl,
+      color: color,
+      productId: product.id,
+      size: size
+    }
   }
-  this.lastItemId += 1; // Increment the last used itemId
-  localStorage.setItem('lastItemId', this.lastItemId.toString());
-  return{
-    itemId: this.lastItemId,
-    productName: product.name,
-    price: product.price,
-    quantity: 0,
-    pictureUrl: product.productItemImgs[0].imageUrl,
-    color: color,
-    productId: product.id,
-    size: size
-
-  }
-}
+  
    
  private isProduct(item: CartItem | Product): item is Product{
   return (item as Product) !== undefined;

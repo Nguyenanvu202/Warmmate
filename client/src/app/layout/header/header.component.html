@@ -32,13 +32,19 @@
               </div>
             
             
-            <div class="account"><img src="/images/navbar/icon-account.svg"  alt="app-account"><a href="#"></a></div>
 
             <div class="cart ">
                 <a routerLink="/cart" matBadge="{{cartService.itemCount()}}" matBadgesize="large">
                     <img src="/images/navbar/icon-cart.svg"  alt="app-cart">
                 </a>
             </div>
+
+            @if(accountService.currentUser()){
+                <div class="account rotate-180 cursor-pointer" (click)="logout()" ><img style="width: 35px;" src="/images/navbar/logout-button.png"  alt="app-account"><a href="#"></a></div>
+
+            }@else {
+                <div class="account cursor-pointer" (click)="openLoginDialog()" ><img src="/images/navbar/icon-account.svg"  alt="app-account"><a href="#"></a></div>
+            }
         </div>
     </div>
 </header>

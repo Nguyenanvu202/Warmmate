@@ -1,0 +1,9 @@
+.mat-mdc-unelevated-button:not(:disabled){
+    --mdc-filled-button-container-color: black;
+
+}
+
+.mat-form-field-appearance-outline{
+    --mdc-outlined-text-field-focus-outline-color:black;
+    --mdc-outlined-text-field-focus-label-text-color: black;
+  }
