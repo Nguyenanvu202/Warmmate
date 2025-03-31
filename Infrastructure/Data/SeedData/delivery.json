@@ -1,0 +1,26 @@
+[
+  {
+    "ShortName": "Giao hàng hơi nhanh",
+    "Description": "Giao hàng nhanh vừa vừa",
+    "DeliveryTime": "1-2 Days",
+    "Price": 10
+  },
+  {
+    "ShortName": "Giao hàng bình thường",
+    "Description": "Giao trong vòng 5 ngày",
+    "DeliveryTime": "2-5 Days",
+    "Price": 5
+  },
+  {
+    "ShortName": "Giao hàng tiết kiệm",
+    "Description": "Vừa chậm vừa mắc",
+    "DeliveryTime": "Trong vòng một tháng",
+    "Price": 2
+  },
+  {
+    "ShortName": "Miễn phí",
+    "Description": "Free! shipper chết đói luôn!",
+    "DeliveryTime": "1-2 Weeks",
+    "Price": 0
+  }
+]

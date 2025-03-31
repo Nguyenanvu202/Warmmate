@@ -8,7 +8,7 @@ export type User ={
 export type Address={
     line1: string,
     line2: string,
-    tinh: string,
+    city: string,
     quan: string,
     huyen: string
 }

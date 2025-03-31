@@ -32,4 +32,5 @@ public class StoreContext : IdentityDbContext<AppUser>
     public DbSet<Variation> Variations { get; set; }
     public DbSet<VariationOpt> VariationOpts { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 }

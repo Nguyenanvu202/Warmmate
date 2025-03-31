@@ -1,3 +1,107 @@
-<div class="mt-5">
-    <h1 class="text-2xl">Only authorize users should be see this</h1>
+<div class="flex mt-32 gap-6">
+  <div class="w-3/4">
+    <mat-stepper
+    (selectionChange)="onStepChange($event)"
+    [linear]="true"
+      #stepper
+      class="bg-white border border-gray-200 shadow-sm ml-[30px]"
+    >
+      <mat-step label="Address" [completed]="completionStatus().address" >
+        <mat-form-field appearance="outline">
+          <mat-label>Họ và Tên</mat-label>
+          <input type="text" matInput [(ngModel)]="fullName" name="fullName" (ngModelChange)="checkAddressCompletion()"/>
+        </mat-form-field>
+        
+
+        <mat-form-field appearance="outline">
+          <mat-label>Địa chỉ 1</mat-label>
+          <input type="text" matInput [(ngModel)]="addressUser.line1" name="address1" (ngModelChange)="checkAddressCompletion()"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Địa chỉ 2 (không bắt buộc)</mat-label>
+          <input type="text" matInput [(ngModel)]="addressUser.line2" name="address2" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Tỉnh Thành Phố</mat-label>
+          <mat-select
+            matInput [(ngModel)]="selectedProvince"
+            (selectionChange)="onProvinceChange()"
+            (ngModelChange)="checkAddressCompletion()">
+            @for (province of provinces; track province.id) {
+            <mat-option [value]="province.id">{{
+              province.full_name
+            }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Quận Huyện</mat-label>
+            <mat-select
+              matInput [(ngModel)]="selectedDistrict"
+              (selectionChange)="onDistrictChange()"
+            >
+              @for (district of districts; track district.id) {
+              <mat-option [value]="district.id" (ngModelChange)="checkAddressCompletion()">
+                {{district.full_name}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Phường xã</mat-label>
+            <mat-select
+              matInput [(ngModel)]="selectedWard"
+              (selectionChange)="onWardChange()"
+            >
+              @for (ward of wards; track ward.id) {
+              <mat-option [value]="ward.id" (ngModelChange)="checkAddressCompletion()">
+                {{ward.full_name}}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="flex justify-end mt-1">
+            <mat-checkbox [checked]="saveAddress"
+            (change)="onSaveAddressCheckboxChange($event)"
+            >
+              Lưu địa chỉ mặc định
+            </mat-checkbox>
+          </div>
+        <div class="flex justify-between mt-6">
+          <button routerLink="/shop" mat-stroked-button>
+            Continue shopping
+          </button>
+          <button matStepperNext mat-flat-button>Next</button>
+        </div>
+
+      </mat-step>
+
+      <mat-step label="Shipping" [completed]="completionStatus().delivery"> 
+        <app-checkout-delivery (deliveryComplete)="handleDeliveryChange($event)"></app-checkout-delivery>
+        <div class="flex justify-between mt-6">
+          <button matStepperPrevious mat-flat-button>Back</button>
+          <button matStepperNext mat-flat-button>Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step label="Confirmation">
+        <app-checkout-review [addressUser]="addressUser" [fullName]="fullName"></app-checkout-review>
+        <div class="flex justify-between mt-6">
+          <button matStepperPrevious mat-stroked-button>Back</button>
+          <button mat-flat-button
+            (click)="confirmPayment(stepper)">
+            <span>Pay {{cartService.totals()?.total | currency}}</span>
+          </button>
+      </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <div class="w-1/4">
+    <app-order-summary></app-order-summary>
+  </div>
 </div>

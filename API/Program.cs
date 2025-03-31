@@ -3,6 +3,7 @@ using API.DTOs;
 using API.Error;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Momo;
 using Core.IRepository;
 using Core.IRepository.ProductRelateRepo;
 using Infrastructure.Data;
@@ -16,15 +17,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//DbContext
 builder.Services.AddDbContext<StoreContext>(opt =>{
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddScoped<IItemRepo, ItemRepo>();
+//MOMO
+builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+builder.Services.AddScoped<IMomoService, MomoService>();
+//GenericRepo
 builder.Services.AddScoped(typeof(IGenericRepo<>),typeof(GenericRepo<>));
+
+//Cors
 builder.Services.AddCors();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+
+//Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
 {
     var connString = builder.Configuration.GetConnectionString("Redis") 
@@ -32,37 +42,26 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
     var configuration = ConfigurationOptions.Parse(connString, true);
     return ConnectionMultiplexer.Connect(configuration);
 });
-builder.Services.AddSingleton<ICartService, CartService>();
-
+//AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<GenericMappingProfiles>();
-builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
 var mapperConfig = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile(new GenericMappingProfiles());
 });
-
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
-// // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
+//Service
+builder.Services.AddSingleton<ICartService, CartService>();
+
+//Authorization
+builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
+builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
-// // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
-
-//app.UseHttpsRedirection(); //that is using for redirect http to https
-
-//app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
-//allow header: any http header will be allow, Method: any method will me allow (post, put, get...), WithOrigins: another url
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200","https://localhost:4200"));
 app.MapControllers();
