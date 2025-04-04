@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 
 namespace API.DTOs;
 
@@ -38,6 +39,20 @@ public class GenericMappingProfiles:Profile
         
         CreateMap<AddressDTO, Address>();
         CreateMap<Address, AddressDTO>();
+
+        CreateMap<OrderItem, OrderItemDTO>()
+        .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ItemOrdered.ProductId))
+        .ForMember(dest => dest.ProductName,opt => opt.MapFrom(src => src.ItemOrdered.ProductName))
+        .ForMember(dest => dest.PictureUrl,opt => opt.MapFrom(src => src.ItemOrdered.PictureUrl)).ReverseMap();
+
+
+        CreateMap<Order, OrderDTO>()
+        .ForMember(dest => dest.DeliveryMethod, opt => opt.MapFrom(src => src.DeliveryMethod.Description))
+        .ForMember(dest => dest.ShippingPrice, opt => opt.MapFrom(src => src.DeliveryMethod.Price))
+        .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.GetTotal()))
+        .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+        .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems)).ReverseMap();
+        
     }
 
    

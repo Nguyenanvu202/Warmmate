@@ -9,8 +9,14 @@ namespace API.Controllers.ProductRelatedController;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BaseAPIController(IMapper mapper) : ControllerBase
+public class BaseAPIController : ControllerBase
 {
+        protected readonly IMapper mapper;
+    
+    public BaseAPIController(IMapper mapper)
+    {
+        this.mapper = mapper;
+    }
     protected async Task<ActionResult> CreatePageResult<T,TDto>(IGenericRepo<T> repo, ISpecification<T> spec, int pageIndex, int pageSize) where T : BaseEntity
     {
         var items = await repo.GetAllBySpec(spec);

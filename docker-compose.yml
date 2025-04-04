@@ -1,4 +1,3 @@
-version: '3.8'   # Specify Docker Compose version (optional, but good practice)
 
 services:   # The services key is a map
   redis:   # The service name, which in this case is redis

@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Infrastructure.Config.ProductConfig;
 
 using Infrastructure.Config.ProductConfiguration;
@@ -33,4 +34,6 @@ public class StoreContext : IdentityDbContext<AppUser>
     public DbSet<VariationOpt> VariationOpts { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 }

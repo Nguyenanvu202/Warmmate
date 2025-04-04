@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers.ProductRelatedController
 {
     
-    public class ItemsController(IGenericRepo<ProductItem> _itemRepo, IMapper mapper) : BaseAPIController(mapper)
+    public class ItemsController(IUnitOfWork unitOfWork, IMapper mapper) : BaseAPIController(mapper)
     {
 
         [HttpGet]
@@ -19,7 +19,7 @@ namespace API.Controllers.ProductRelatedController
         {
 
             var spec = new ProductSpecification(specParams);
-            return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
+            return Ok(await CreatePageResult<ProductItem,ItemDTO>(unitOfWork.Repository<ProductItem>(),spec,specParams.PageIndex,specParams.PageSize));
         }
 
  
@@ -35,7 +35,7 @@ namespace API.Controllers.ProductRelatedController
             [FromQuery] ProductSpecificationParams specParams, int Id)
         {
             var spec = new ProductSpecification(specParams, Id);
-            return Ok(await CreatePageResult<ProductItem,ItemDTO>(_itemRepo,spec,specParams.PageIndex,specParams.PageSize));
+            return Ok(await CreatePageResult<ProductItem,ItemDTO>(unitOfWork.Repository<ProductItem>(),spec,specParams.PageIndex,specParams.PageSize));
         }
         
 
@@ -44,14 +44,14 @@ namespace API.Controllers.ProductRelatedController
         {
             var spec = new OptionsSpecification(name);
             
-            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
+            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(unitOfWork.Repository<ProductItem>(),spec));
         }
         [HttpGet("{productId:int}/{optionId:int}")]
         public async Task<ActionResult<IReadOnlyList<OptDTO>>> GetProductOptions(int productId,int optionId)
         {
             var spec = new ProductSpecification(productId, optionId);
             
-            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(_itemRepo,spec));
+            return Ok(await GetAllResult<ProductItem,OptDTO,VariationOpt>(unitOfWork.Repository<ProductItem>(),spec));
         }
 
         [HttpGet("{Id:int}")]
@@ -59,7 +59,7 @@ namespace API.Controllers.ProductRelatedController
         {
 
             var spec = new ProductSpecification(Id);
-            var item = await GetResult<ProductItem,ItemDTO>(_itemRepo,spec);
+            var item = await GetResult<ProductItem,ItemDTO>(unitOfWork.Repository<ProductItem>(),spec);
             if (item == null) return NotFound();
             return item;
         }
@@ -67,8 +67,8 @@ namespace API.Controllers.ProductRelatedController
         [HttpPost]
         public async Task<ActionResult<ProductItem>> AddItem(ProductItem item)
         {
-            _itemRepo.Add(item);
-            if (await _itemRepo.SaveChangeAsync())
+            unitOfWork.Repository<ProductItem>().Add(item);
+            if (await unitOfWork.Complete())
             {
                 return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item);
             }
@@ -79,10 +79,10 @@ namespace API.Controllers.ProductRelatedController
         [HttpPut]
         public async Task<ActionResult> UpdateItem(int Id, ProductItem item)
         {
-            if (item.Id != Id || _itemRepo.Exist(Id))
+            if (item.Id != Id || unitOfWork.Repository<ProductItem>().Exist(Id))
             {
-                _itemRepo.Update(item);
-                await _itemRepo.SaveChangeAsync();
+                unitOfWork.Repository<ProductItem>().Update(item);
+                await unitOfWork.Complete();
             }
             return BadRequest("Cannot update Item!");
         }
@@ -90,10 +90,10 @@ namespace API.Controllers.ProductRelatedController
         [HttpDelete("{Id:int}")]
         public async Task<ActionResult> DeleteItem(int Id)
         {
-            var existItem = await _itemRepo.GetByIdAsync(Id);
+            var existItem = await unitOfWork.Repository<ProductItem>().GetByIdAsync(Id);
             if (existItem == null) { return NotFound(); }
-            _itemRepo.Delete(existItem);
-            if (await _itemRepo.SaveChangeAsync())
+            unitOfWork.Repository<ProductItem>().Delete(existItem);
+            if (await unitOfWork.Complete())
             {
 
                 return NoContent();

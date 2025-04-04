@@ -47,12 +47,6 @@ public class GenericRepo<T>(StoreContext _storeContext) : IGenericRepo<T> where 
     }
 
 
-
-    public async Task<bool> SaveChangeAsync()
-    {
-        return await _storeContext.SaveChangesAsync() > 0;
-    }
-
     public void Update(T entity)
     {
        _storeContext.Set<T>().Attach(entity);

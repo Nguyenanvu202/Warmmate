@@ -40,8 +40,10 @@
             </div>
 
             @if(accountService.currentUser()){
-                <div class="account rotate-180 cursor-pointer" (click)="logout()" ><img style="width: 35px;" src="/images/navbar/logout-button.png"  alt="app-account"><a href="#"></a></div>
-
+                <!-- <div class="account rotate-180 cursor-pointer" (click)="logout()" ><img style="width: 35px;" src="/images/navbar/logout-button.png"  alt="app-account"><a href="#"></a></div> -->
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <img style="width: 35px;" src="/images/navbar/loginLogo.png"  alt="app-account">
+                </button>
             }@else {
                 <div class="account cursor-pointer" (click)="openLoginDialog()" ><img src="/images/navbar/icon-account.svg"  alt="app-account"><a href="#"></a></div>
             }
@@ -52,3 +54,18 @@
     <mat-progress-bar class="fixed top-[90px] z-55" mode="indeterminate"></mat-progress-bar>
 }
 
+<mat-menu #menu="matMenu" class="px-5">
+    <button mat-menu-item class="px-3" routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>
+        My cart
+    </button>
+    <button mat-menu-item class="px-3" routerLink="/orders">
+        <mat-icon>history</mat-icon>
+        My orders
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="px-3" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+    </button>
+</mat-menu>

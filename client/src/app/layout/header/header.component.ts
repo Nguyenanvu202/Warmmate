@@ -17,12 +17,18 @@ import { CartService } from '../../core/services/cart.service';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { LoginComponent } from '../../feature/account/login/login.component';
 import { AccountService } from '../../core/services/account.service';
+import {MatMenu, MatMenuItem, MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
+import { MatDivider } from '@angular/material/divider';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [MatBadge,MatProgressBarModule, 
     MatIconModule, FormsModule, RouterLink, 
     RouterLinkActive,
+    MatMenuTrigger,
+    MatMenu,
+    MatDivider,
+    MatMenuItem
     ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

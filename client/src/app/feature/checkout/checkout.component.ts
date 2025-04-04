@@ -2,8 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { OrderSummaryComponent } from '../../shared/components/order-summary/order-summary.component';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatButton } from '@angular/material/button';
-import { Router, RouterLink } from '@angular/router';
-import { SnackbarService } from '../../core/services/snackbar.service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -23,6 +22,9 @@ import { CheckoutDeliveryComponent } from "./checkout-delivery/checkout-delivery
 import { CheckoutReviewComponent } from "./checkout-review/checkout-review.component";
 import { CartService } from '../../core/services/cart.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrderToCreate, ShippingAddress } from '../../shared/models/order';
+import { PaymentService } from '../../core/services/payment.service';
+import { OrderService } from '../../core/services/order.service';
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -52,11 +54,12 @@ export class CheckoutComponent implements OnInit {
   provinces: any[] = [];
   districts: any[] = [];
   wards: any[] = [];
-  private snackbar = inject(SnackbarService);
   private accountService = inject(AccountService);
+  private orderService = inject(OrderService)
   selectedProvince = '0';
   selectedDistrict = '0';
   selectedWard? = '0';
+  message: string = '';
   //Value of user input
   fullName?: string;
   addressUser: Address = {
@@ -70,16 +73,24 @@ export class CheckoutComponent implements OnInit {
   private router = inject(Router);
   panelOpenState = false;
   cartService = inject(CartService)
+  paymentService = inject(PaymentService)
   saveAddress= false;
   completionStatus = signal<{address: boolean, delivery: boolean}>(
     {address: false, delivery: false}
   )
-  constructor(private addressService: AddressService) {}
+  constructor(private addressService: AddressService,private route: ActivatedRoute) {}
 
    ngOnInit() {
     this.loadProvinces();
     this.getCurrentUser();
     this.checkAddressCompletion();
+    this.route.queryParams.subscribe(params => {
+      this.message = params['message'];
+      console.log('Decoded message:', decodeURIComponent(this.message));
+      if (this.message === "Success") {  // Fixed: using === instead of =
+        this.handleSuccessfulOrder();
+      }
+    });
   }
 checkAddressCompletion() {
   const isComplete = Boolean(
@@ -226,8 +237,47 @@ createAddress(): Address {
 }
 
 async confirmPayment(stepper: MatStepper){
-  this.cartService.deleteCart();
-  this.cartService.selectedDelivery.set(null);
-  this.router.navigateByUrl('checkout/success');
+  this.paymentService.paymentWithCart(localStorage.getItem("cart_id")!).subscribe({
+    next: (response) =>{
+      console.log("Momo: ", response);
+      
+      window.location.assign(response.payUrl)
+    }
+  });
+ 
+}
+private async handleSuccessfulOrder(): Promise<void> {
+  try {
+    const order = await this.createOrderModel();
+    console.log("order: ", order);
+    const orderResult = await firstValueFrom(this.orderService.createOrder(order));
+    
+    if (orderResult) {
+      this.orderService.orderComplete = true;
+      await this.cartService.deleteCart();
+      this.cartService.selectedDelivery.set(null);
+      this.router.navigateByUrl('checkout/success');
+    } else {
+      console.error('Order creation failed');
+      // Handle the error appropriately (show message to user, etc.)
+    }
+  } catch (error) {
+    console.error('Error during order processing:', error);
+    // Handle the error appropriately
+  }
+}
+private async createOrderModel(): Promise<OrderToCreate>{
+  const cart = this.cartService.cart();
+  const shippingAddress = this.addressUser as ShippingAddress;
+  shippingAddress.name = this.fullName!;
+  if(!cart?.id || !cart?.deliveryMethodId || !cart||!shippingAddress){
+    throw new Error('Probem creating order');
+  }
+
+  return {
+    cartId: cart.id,
+    deliveryMethodId: cart.deliveryMethodId,
+    shippingAddress
+  }
 }
 }

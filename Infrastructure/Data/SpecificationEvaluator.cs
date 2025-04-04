@@ -21,6 +21,7 @@ public class SpecificationEvaluator<T> where T : BaseEntity
         if(spec.Includes != null){
 
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+            query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
         }
 
         // Apply IncludeStrings (for string-based includes)
@@ -47,6 +48,10 @@ public class SpecificationEvaluator<T> where T : BaseEntity
         if (spec.Select != null)
         {
             selectQuery = query.Select(spec.Select);
+        }
+                if (spec.OrderByDescending != null)
+        {
+            query = query.OrderByDescending(spec.OrderByDescending);
         }
         
         if (spec.IsDistinct)

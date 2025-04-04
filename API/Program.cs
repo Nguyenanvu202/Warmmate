@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using API.DTOs;
 using API.Error;
+using API.SignalR;
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Momo;
@@ -27,6 +28,7 @@ builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("Mo
 builder.Services.AddScoped<IMomoService, MomoService>();
 //GenericRepo
 builder.Services.AddScoped(typeof(IGenericRepo<>),typeof(GenericRepo<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Cors
 builder.Services.AddCors();
@@ -53,19 +55,23 @@ IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 //Service
 builder.Services.AddSingleton<ICartService, CartService>();
-
+//SignalR
+builder.Services.AddSignalR();
 //Authorization
 builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
 builder.Services.AddAuthorization();
-
+builder.Services.AddHttpContextAccessor(); 
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200","https://localhost:4200"));
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>();
+app.MapHub<NotificationHub>("/hub/notifications"); 
 try
 {
     using var scope = app.Services.CreateScope();  
